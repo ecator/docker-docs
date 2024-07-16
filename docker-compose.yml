@@ -1,0 +1,14 @@
+services:
+  build:
+    image: docker-docs-build
+    build:
+      context: https://github.com/docker/docs.git
+      target: dev
+  app:
+    depends_on: ["build"]
+    image: ecat/docker-docs
+    restart: always
+    build:
+      context: .
+    ports:
+      - 4000:4000
